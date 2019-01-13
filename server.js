@@ -1,8 +1,6 @@
 var express = require("express");
 var logger = require("morgan");
-var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
-
 
 var app = express();
 var PORT = process.env.PORT || 8080;
@@ -23,11 +21,6 @@ app.set("view engine", "handlebars");
 
 // routes
 require("./routes/controller")(app);
-
-// Connect to the Mongo DB
-var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mongoscraper'
-
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // Start the server
 app.listen(PORT, function () {
