@@ -1,5 +1,5 @@
 {
-  "name": "mongoose-hw",
+  "name": "mongo-scraper",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Austin-Shep/mongoose-hw.git"
+    "url": "git+https://github.com/ewu2/mongo-scraper.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Austin-Shep/mongoose-hw/issues"
+    "url": "https://github.com/ewu2/mongo-scraper/issues"
   },
-  "homepage": "https://github.com/Austin-Shep/mongoose-hw#readme",
+  "homepage": "https://github.com/ewu2/mongo-scraper/blob/master/README.md",
   "dependencies": {
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
