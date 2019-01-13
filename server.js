@@ -23,7 +23,7 @@ app.set('view engine', 'handlebars');
 // Make public a static dir to serve our static files
 app.use(express.static("public"));
 
-mongoose.Promise = Promise;
+mongoose.Promise = gloabl.Promise;
 mongoose.connect(MONGODB_URI, {
   useMongoClient: true
 });
