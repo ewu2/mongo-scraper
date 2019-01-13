@@ -1,47 +1,35 @@
+{{!-- need to create a button that scrapes, and then just dsiplay all the articles, with duttons to show the comments
+--}}
 <div class="container">
-    <div class="header clearfix">
-        <nav>
-            <ul class="nav nav-pills float-right">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-        </nav>
-        <h3 class="text-muted">Mongo Scraping</h3>
-    </div>
-
-    <div class="jumbotron">
-        <h1 class="jumboheader">Mongo Scraper</h1>
-        <p class="lead">PetaPixel Edition</p>
-        <p><a class="btn btn-lg btn-success" href="/scrape" role="button">SCRAPE THE LATEST!</a></p>
-    </div>
-
-    {{!--News Cards--}} {{!--Iterate through the results and populate the handlebars injection points with the scraped
-    titles,
-    links, and article snippets.--}} {{#each result}}
-    <div class="card news-section">
-        <a href="{{this.link}}">
-            <h4 class="card-header">{{this.title}}</h4>
-        </a>
-        <div class="card-block">
-            {{!--
-            <h4 class="card-title"></h4>
-            </a>--}}
-            <a href="{{this.link}}">
-                <p class="card-text">{{this.articleSnippet}}</p>
+    <div class="row">
+        <div class="col s12">
+            <h1 class="">NEWS WITHOUT THE FUSS</h1>
+            <a href="/scrape">
+                <button class="btn" id="scrape">
+                    Scrape the New York Times
+                </button>
             </a>
-            <br>
-            <a href="/articles/{{this._id}}" class="btn btn-primary">Comment</a>
+            {{#each article}}
+            <div class="section">
+                <h5>
+                    <a href="article/{{this._id}}">{{this.title}}</a>
+                </h5>
+                <p>{{this.summary}}</p>
+            </div>
+            <div class="divider"></div>
+            {{/each}}
         </div>
     </div>
-    <br>
-    <br> {{/each}}
-
-
-
-    <footer class="footer">
-        <p>&copy; Esther Wu 2018</p>
-    </footer>
-
 </div>
-<!-- /container -->
+{{!--
+<script type="text/javascript">
+    $("#scrape").on("click", (event) => {
+        event.preventDefault();
+        $.ajax({
+            method: "GET",
+            URL: "/scrape"
+        }).then(() => {
+            location.reload();
+        })
+    })
+</script> --}}

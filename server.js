@@ -1,51 +1,36 @@
-// Our Dependencies
 var express = require("express");
-var exphbs = require("express-handlebars");
-var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+var exphbs = require("express-handlebars");
 
-// Initialize Express
+
 var app = express();
-var PORT = process.env.PORT || 8000;
+var PORT = process.env.PORT || 3030;
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+// Configure middleware
 
-// Use morgan and body parser with our app
+// Use morgan logger for logging requests
 app.use(logger("dev"));
-app.use(bodyParser.urlencoded({ extended: false }));
-
-// allow the handlesbars engine to be in our toolset
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-// Now set handlebars engine
-app.set('view engine', 'handlebars');
-
-// Make public a static dir to serve our static files
+// Parse request body as JSON
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+// Make public a static folder
 app.use(express.static("public"));
 
-mongoose.Promise = gloabl.Promise;
-mongoose.connect(MONGODB_URI, {
-  useMongoClient: true
-});
+// Handlebars
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
-// Mongoose (orm) connects to our mongo db and allows us to have access to the MongoDB commands for easy CRUD 
-// mongoose.connect("mongodb://heroku_f9jqr8qs:efv0pqfn8qdqhqcv7k6fr8fhg@ds161039.mlab.com:61039/heroku_f9jqr8qs");
-// var db = mongoose.connection;
+// routes
+require("./routes/controller")(app);
 
-// if any errors than console errors
-// db.on("error", function (error) {
-//   console.log("Mongoose Error: ", error);
-// });
+// Connect to the Mongo DB
+var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/newscrapper'
 
-// display a console message when mongoose has a conn to the db
-// db.once("open", function () {
-//   console.log("Mongoose connection successful.");
-// });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
-// Require the routes in our controllers js file
-require("./controllers/articlesController.js")(app);
-
-//Listen on PORT 8000 & notify us.
+// Start the server
 app.listen(PORT, function () {
-  console.log("Listening on port: http://localhost:" + PORT);
+    console.log(`App running on port ${PORT}`);
 });
+

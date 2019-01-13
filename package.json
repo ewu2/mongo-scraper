@@ -1,28 +1,28 @@
 {
-  "name": "mongo-news-scraper",
+  "name": "mongoose-hw",
   "version": "1.0.0",
-  "description": "A little web app that scrapes news from a news site. Made with Mongo and Cheerio. Edit",
-  "main": "server.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hadicodes/mongo-news-scraper.git"
+    "url": "git+https://github.com/Austin-Shep/mongoose-hw.git"
   },
-  "author": "Hadi Yousufi",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hadicodes/mongo-news-scraper/issues"
+    "url": "https://github.com/Austin-Shep/mongoose-hw/issues"
   },
-  "homepage": "https://github.com/hadicodes/mongo-news-scraper#readme",
+  "homepage": "https://github.com/Austin-Shep/mongoose-hw#readme",
   "dependencies": {
-    "body-parser": "^1.16.1",
-    "cheerio": "^0.22.0",
-    "express": "^4.14.1",
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
-    "mongoose": "^4.8.4",
-    "morgan": "^1.8.1",
-    "request": "^2.79.0"
+    "mongoose": "^5.4.1",
+    "morgan": "^1.9.1"
   }
 }
