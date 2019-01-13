@@ -14,10 +14,10 @@ var PORT = process.env.PORT || 8000;
 
 // Use morgan and body parser with our app
 app.use(logger("dev"));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // allow the handlesbars engine to be in our toolset
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 // Now set handlebars engine
 app.set('view engine', 'handlebars');
 
@@ -25,23 +25,26 @@ app.set('view engine', 'handlebars');
 app.use(express.static("public"));
 
 // Mongoose (orm) connects to our mongo db and allows us to have access to the MongoDB commands for easy CRUD 
-mongoose.connect("mongodb://heroku_f9jqr8qs:efv0pqfn8qdqhqcv7k6fr8fhg@ds161039.mlab.com:61039/heroku_f9jqr8qs");
-var db = mongoose.connection;
+// mongoose.connect("mongodb://heroku_f9jqr8qs:efv0pqfn8qdqhqcv7k6fr8fhg@ds161039.mlab.com:61039/heroku_f9jqr8qs");
+// var db = mongoose.connection;
 
 // if any errors than console errors
-db.on("error", function (error) {
-  console.log("Mongoose Error: ", error);
-});
+// db.on("error", function (error) {
+//   console.log("Mongoose Error: ", error);
+// });
 
 // display a console message when mongoose has a conn to the db
-db.once("open", function () {
-  console.log("Mongoose connection successful.");
-});
+// db.once("open", function () {
+//   console.log("Mongoose connection successful.");
+// });
+
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+mongoose.connect(MONGODB_URI);
 
 // Require the routes in our controllers js file
 require("./controllers/articlesController.js")(app);
 
 //Listen on PORT 8000 & notify us.
 app.listen(PORT, function () {
-  console.log("App running on port 8 THOUSAND!!!!!!!!");
+  console.log("Listening on port: http://localhost:" + PORT);
 });
