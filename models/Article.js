@@ -1,40 +1,42 @@
+// Require mongoose orm
 var mongoose = require("mongoose");
-
-// Save a reference to the Schema constructor
+// Create Schema object constructor
 var Schema = mongoose.Schema;
 
-// Using the Schema constructor, create a new UserSchema object
-// This is similar to a Sequelize model
+// Create an article schematic to define the rules of the articles beings
+// scraped.
 var ArticleSchema = new Schema({
-  // `title` is required and of type String
+  // Here title is a required string because it's value is set to true for the
+  // key, required.
   title: {
     type: String,
     required: true,
     unique: true
   },
-  // `link` is required and of type String
+  // link is a required string and also unique to prevent duplicates
   link: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
-  // `note` is an object that stores a Note id
-  // The ref property links the ObjectId to the Note model
-  // This allows us to populate the Article with an associated Note
-  summary: {
-    type: String
+  // articleSnippet is a required string and also unique to prevent duplicates
+  articleSnippet: {
+    type: String,
+    required: true,
+    unique: true
   },
-  saved: {
-    type: Boolean,
-    default: false
-  },
-  comments: [{
-    type: Schema.Types.ObjectId,
-    ref: "Comment"
-  }]
+  // This  saves an array of all the comments as a property of article schema, ref
+  // refers to the Comment model
+  comment: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Comment"
+    }
+  ]
 });
 
-// This creates our model from the above schema, using mongoose's model method
+// Create the Article model with the ArticleSchema
 var Article = mongoose.model("Article", ArticleSchema);
 
-// Export the Article model
+// Exports the model
 module.exports = Article;

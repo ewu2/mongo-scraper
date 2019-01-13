@@ -1,18 +1,24 @@
+// Require mongoose
 var mongoose = require("mongoose");
-
-// Save a reference to the Schema constructor
+// Create a schema object constructor
 var Schema = mongoose.Schema;
 
-// Using the Schema constructor, create a new NoteSchema object
-// This is similar to a Sequelize model
+// Create the Comment schema
 var CommentSchema = new Schema({
-  // `body` is of type String
-  body: {type: String,
-  required: true}
+  // name is a string that's required 
+  name: {
+    type: String,
+    required: true
+  },
+  // body is a string that's required
+  body: {
+    type: String,
+    required: true
+  }
 });
 
-// This creates our model from the above schema, using mongoose's model method
+// Create the Comment model with the CommentSchema
 var Comment = mongoose.model("Comment", CommentSchema);
 
-// Export the Note model
+// Exports the Comment model
 module.exports = Comment;
