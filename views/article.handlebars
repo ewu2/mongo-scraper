@@ -1,17 +1,17 @@
-{{!-- this will be the page that displays the indv articles with comment sections--}}
 <div class="container">
     <div class="row">
-        <div class="col m12">
-            <h2 id="artitle" data-id="{{article._id}}">
+        <div class="col-md-12">
+            <br>
+            <h2 id="article" data-id="{{article._id}}">
                 <a href="{{article.link}}"></a>
                 {{article.title}}
             </h2>
-            <p class="blockquote">{{article.summary}}</p>
+            <p class="lead">{{article.summary}}</p>
         </div>
     </div>
     <div class="row">
-        <div class="col m12">
-            <h4>Comments</h4>
+        <div class="col-md-12">
+            <h4>comment(s): </h4>
             {{#each article.comment}}
             <div class="section">
                 <h5>{{this.poster}}</h5>
@@ -22,22 +22,29 @@
             {{/each}}
             <form action="/article/{{article._id}}" method="post">
                 <div class="row">
-                    <div class="input-field col s6">
-                        <input placeholder="Guest" id="username" type="text" class="validate">
-                        <label for="username">Username</label>
+                    <div class="col-3">
                     </div>
-                    <div class="input-field col s6">
-                        <input id="title" type="text" class="validate">
-                        <label for="title">Title</label>
+                    <div class="col-6">
+                        <form>
+                            <div class="form-group">
+                                <label for="username">username: </label>
+                                <input type="text" class="form-control validate" id="username" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="title">title: </label>
+                                <input type="text" class="form-control validate" id="title" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">comment: </label>
+                                <textarea class=" form-control validate" id="comment" rows="5"></textarea>
+                            </div>
+                        </form>
+                        <button type="button" id="submit" class="btn btn-outline-dark">submit</button>
+                        <br><br>
+                    </div>
+                    <div class="col-3">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <textarea id="comment" class="materialize-textarea"></textarea>
-                        <label for="comment">Comment Here</label>
-                    </div>
-                </div>
-                <button type="submit" class="btn" id="submit">Submit</button>
             </form>
         </div>
     </div>
@@ -46,7 +53,7 @@
     $("#submit").on("click", function (event) {
         event.preventDefault
         var comment
-        var id = $("h2#artitle").data("id")
+        var id = $("h2#article").data("id")
 
         $.ajax({
             method: "POST",
@@ -59,6 +66,5 @@
         }).then(function () {
             location.reload
         })
-
     })
 </script>

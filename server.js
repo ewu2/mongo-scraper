@@ -5,7 +5,7 @@ var exphbs = require("express-handlebars");
 
 
 var app = express();
-var PORT = process.env.PORT || 3030;
+var PORT = process.env.PORT || 8080;
 
 // Configure middleware
 
@@ -25,12 +25,12 @@ app.set("view engine", "handlebars");
 require("./routes/controller")(app);
 
 // Connect to the Mongo DB
-var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/newscrapper'
+var MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mongoscraper'
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // Start the server
 app.listen(PORT, function () {
-    console.log(`App running on port ${PORT}`);
+    console.log(`App running on port http://localhost:${PORT}`);
 });
 
