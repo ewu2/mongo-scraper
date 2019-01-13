@@ -5,12 +5,11 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
-// Using es6 js promise
-mongoose.Promise = Promise;
-
 // Initialize Express
 var app = express();
 var PORT = process.env.PORT || 8000;
+
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
 
 // Use morgan and body parser with our app
 app.use(logger("dev"));
@@ -23,6 +22,11 @@ app.set('view engine', 'handlebars');
 
 // Make public a static dir to serve our static files
 app.use(express.static("public"));
+
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI, {
+  useMongoClient: true
+});
 
 // Mongoose (orm) connects to our mongo db and allows us to have access to the MongoDB commands for easy CRUD 
 // mongoose.connect("mongodb://heroku_f9jqr8qs:efv0pqfn8qdqhqcv7k6fr8fhg@ds161039.mlab.com:61039/heroku_f9jqr8qs");
@@ -37,9 +41,6 @@ app.use(express.static("public"));
 // db.once("open", function () {
 //   console.log("Mongoose connection successful.");
 // });
-
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-mongoose.connect(MONGODB_URI);
 
 // Require the routes in our controllers js file
 require("./controllers/articlesController.js")(app);
